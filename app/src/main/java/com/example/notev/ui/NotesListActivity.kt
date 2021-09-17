@@ -2,13 +2,18 @@ package com.example.notev.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.notev.R
 import com.example.notev.adapter.NotesListAdapter
 import com.example.notev.data.models.Note
 import com.example.notev.databinding.ActivityNotesListBinding
+import com.example.notev.utils.Sorting
+import com.example.notev.utils.extension.onQueryTextListener
 import com.example.notev.utils.extension.startSpecificActivity
 import com.example.notev.viewmodels.NotesListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +53,7 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Listener {
         adapter = NotesListAdapter(context = this, listener = this)
 
         // Init Recycler View.
-        binding.rvNotesList.also {
+        binding.rvNotesList.let {
             it.adapter = adapter // set adapter to recycler view
             it.layoutManager =
                 StaggeredGridLayoutManager(
@@ -68,6 +73,47 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Listener {
                 adapter.differ.submitList(it) // submits list
             }
         }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_notes_list, menu) // inflate menu
+
+        // Set Search item.
+        val searchItem = menu?.findItem(R.id.action_search) // find search menu item
+
+        // Set SearchView.
+        val searchView = searchItem?.actionView as SearchView
+        searchView.run {
+            queryHint = this@NotesListActivity.getText(R.string.search_hint) // set query hint for search view
+            // Set query text listener.
+            onQueryTextListener(false) {
+                viewModel.setQuery(it) // sets new value to viewModel.query
+            }
+        }
+
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_sort_by_newest -> {
+            viewModel.setSorting(Sorting.BY_NEWEST) // sorting by newest
+            true // return
+        }
+        R.id.action_sort_by_oldest -> {
+            viewModel.setSorting(Sorting.BY_OLDEST) // sorting by oldest
+            true // return
+        }
+        R.id.action_sort_by_low -> {
+            viewModel.setSorting(Sorting.BY_LOW_LEVEL) // sorting by low level
+            true // return
+        }
+        R.id.action_sort_by_high -> {
+            viewModel.setSorting(Sorting.BY_HIGH_LEVEL) // sorting by high level
+            true // return
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
 

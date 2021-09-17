@@ -1,5 +1,7 @@
 package com.example.notev.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notev.data.Repository
@@ -21,6 +23,11 @@ class AddEditNoteViewModel @Inject constructor(
 
     // NoteStatus to determine whether create new or edit existing note object.
     var noteStatus = NoteStatus.ADD
+
+
+    // Note object from intent.
+    private val _note = MutableLiveData<Note>()
+    val note: LiveData<Note> get() = _note
 
 
     /**
@@ -47,5 +54,13 @@ class AddEditNoteViewModel @Inject constructor(
      */
     fun delete(note: Note) = viewModelScope.launch {
         repository.delete(note) // calls repository suspend function
+    }
+
+
+    /**
+     * Set new note to LiveData.
+     */
+    fun setNote(note: Note) {
+        _note.value = note
     }
 }

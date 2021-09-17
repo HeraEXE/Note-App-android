@@ -47,7 +47,7 @@ class NotesListAdapter(
         fun bind(position: Int) {
             val note = differ.currentList[position] // gets note from list by index
             // Set note params to views.
-            binding.apply {
+            binding.run {
                 tvTitle.text = note.title // sets title
                 tvContent.text = note.content // sets content
                 tvPriorityLevel.text = priorityLevels[note.priorityLevel] // sets priority level
