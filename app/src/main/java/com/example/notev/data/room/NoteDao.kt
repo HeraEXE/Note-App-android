@@ -1,7 +1,9 @@
 package com.example.notev.data.room
 
 import androidx.room.*
-import com.example.notev.data.model.Note
+import com.example.notev.data.models.Note
+import com.example.notev.utils.Sorting
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Note Dao
@@ -14,7 +16,7 @@ interface NoteDao {
      * @param uses [Note] object to add.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(note: Note) // inserts new note
+    suspend fun insert(note: Note)
 
 
     /**
@@ -22,7 +24,7 @@ interface NoteDao {
      * @param uses [Note] object to update.
      */
     @Update
-    suspend fun update(note: Note) // update edited note
+    suspend fun update(note: Note)
 
 
     /**
@@ -30,32 +32,54 @@ interface NoteDao {
      * @param uses [Note] object to delete.
      */
     @Delete
-    suspend fun delete(note: Note) // deletes note
+    suspend fun delete(note: Note)
 
 
-//    @Query("SELECT * FROM note_table WHERE  priority_level = 0 OR priority_level = 1 OR priority_level = 2 ELSE priority_level = :show END AND title LIKE '%' || :query || '%' ORDER BY date")
-//    fun orderedByDate(query: String): Flow<List<Note>>
-//
-//
-//    @Query("SELECT * FROM note_table WHERE CASE WHEN :show = 3 THEN priority_level = 0 OR priority_level = 1 OR priority_level = 2 ELSE priority_level = :show END AND title LIKE '%' || :query || '%' ORDER BY date DESC")
-//    fun orderedByDateDesc(query: String): Flow<List<Note>>
-//
-//
-//    @Query("SELECT * FROM note_table WHERE CASE WHEN :show = 3 THEN priority_level = 0 OR priority_level = 1 OR priority_level = 2 ELSE priority_level = :show END AND title LIKE '%' || :query || '%' ORDER BY priority_level")
-//    fun orderedByPriority(query: String): Flow<List<Note>>
-//
-//
-//    @Query("SELECT * FROM note_table WHERE CASE WHEN :show = 3 THEN priority_level = 0 OR priority_level = 1 OR priority_level = 2 ELSE priority_level = :show END AND title LIKE '%' || :query || '%' ORDER BY priority_level DESC")
-//    fun orderedByPriorityDesc(query: String): Flow<List<Note>>
+    /**
+     * Order by Newest (or by date DESC).
+     * @param uses [query] string for getting results by note's title.
+     * @return [Flow] - [List] of [Note]s.
+     */
+    @Query("SELECT * FROM note_table WHERE title LIKE '%' || :query || '%' ORDER BY date DESC")
+    fun orderedByNewest(query: String): Flow<List<Note>>
 
 
-//    fun getAllNotes(query: String, sortBy: Int) = when (sortBy) {
-//        SORT_BY_DATE_DESC -> orderedByDateDesc(query)
-//        SORT_BY_DATE -> orderedByDate(query)
-//        SORT_BY_PRIORITY -> orderedByPriority(query)
-//        SORT_BY_PRIORITY_DESC -> orderedByPriorityDesc(query)
-//        else -> orderedByDateDesc(query)
-//    }
+    /**
+     * Order by Oldest (or by date ASC).
+     * @param uses [query] string for getting results by note's title.
+     * @return [Flow] - [List] of [Note]s.
+     */
+    @Query("SELECT * FROM note_table WHERE title LIKE '%' || :query || '%' ORDER BY date")
+    fun orderedByOldest(query: String): Flow<List<Note>>
 
-    // TODO(implement sorting, querying and getting list of notes from the database)
+
+    /**
+     * Order by Low Level (or by priority_level ASC).
+     * @param uses [query] string for getting results by note's title.
+     * @return [Flow] - [List] of [Note]s.
+     */
+    @Query("SELECT * FROM note_table WHERE title LIKE '%' || :query || '%' ORDER BY priority_level")
+    fun orderedByLowLevel(query: String): Flow<List<Note>>
+
+
+    /**
+     * Order by High Level (or by priority_level DESC).
+     * @param uses [query] string for getting results by note's title.
+     * @return [Flow] - [List] of [Note]s.
+     */
+    @Query("SELECT * FROM note_table WHERE title LIKE '%' || :query || '%' ORDER BY priority_level DESC")
+    fun orderedByHighLevel(query: String): Flow<List<Note>>
+
+
+    /**
+     * Gets notes from the [NoteDatabase].
+     * @param uses [query] to search for note by their titles and [sortBy] to sort notes by [Sorting] variants.
+     * @return [Flow] - [List] of [Note]s.
+     */
+    fun getNotes(query: String, sortBy: Sorting) = when (sortBy) {
+        Sorting.BY_NEWEST -> orderedByNewest(query) // newest
+        Sorting.BY_OLDEST -> orderedByOldest(query) // oldest
+        Sorting.BY_LOW_LEVEL -> orderedByLowLevel(query) // low level
+        Sorting.BY_HIGH_LEVEL -> orderedByHighLevel(query) // high level
+    }
 }

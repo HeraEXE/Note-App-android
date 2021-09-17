@@ -1,7 +1,7 @@
 package com.example.notev.data.room
 
 import androidx.room.Database
-import com.example.notev.data.model.Note
+import com.example.notev.data.models.Note
 
 /**
  * Note Database
