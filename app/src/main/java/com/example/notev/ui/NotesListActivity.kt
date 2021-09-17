@@ -1,7 +1,8 @@
-package com.example.notev
+package com.example.notev.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.notev.R
 
 /**
  * The start point (launcher) [Activity].

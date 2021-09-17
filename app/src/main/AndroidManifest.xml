@@ -14,12 +14,12 @@
 
         <!-- Add Edit Note Activity -->
         <activity
-            android:name=".AddEditNoteActivity"
+            android:name=".ui.AddEditNoteActivity"
             android:exported="true" />
 
         <!-- Notes List Activity (Launcher) -->
         <activity
-            android:name=".NotesListActivity"
+            android:name=".ui.NotesListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
