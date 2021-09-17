@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Margin size -->
+    <dimen name="extra_small_margin">4dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
+    <dimen name="large_margin">32dp</dimen>
+
+    <!-- Padding size -->
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
+    <dimen name="large_padding">32dp</dimen>
+
+    <!-- Text size -->
+    <dimen name="small_text_size">14sp</dimen>
+    <dimen name="medium_text_size">16sp</dimen>
+    <dimen name="medium_plus_text_size">20sp</dimen>
+    <dimen name="large_text_size">32sp</dimen>
+
+    <!-- FAB -->
+    <dimen name="max_image_size">30dp</dimen>
+</resources>

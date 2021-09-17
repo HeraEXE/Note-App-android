@@ -1,3 +1,20 @@
 <resources>
+    <!-- Application name -->
     <string name="app_name">Note V</string>
+
+    <!-- Titles -->
+    <string name="tv_title_text">Title:</string>
+    <string name="tv_priority_level_text">Priority level:</string>
+    <string name="tv_content_text">Content:</string>
+
+    <!-- Hints -->
+    <string name="title_hint">Title</string>
+    <string name="content_hint">Content</string>
+
+    <!-- String-Arrays -->
+    <string-array name="priority_array">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
 </resources>

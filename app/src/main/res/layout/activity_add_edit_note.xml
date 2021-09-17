@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEditNoteActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
+            android:orientation="vertical">
+
+            <!-- Title for edit text (as hint) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_text_size"
+                android:textColor="?colorPrimary"
+                android:text="@string/tv_title_text"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_marginTop="@dimen/medium_margin"/>
+
+            <!-- Edit text note tile -->
+            <EditText
+                android:id="@+id/et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_plus_text_size"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="@string/title_hint"
+                android:textColor="?attr/colorOnSecondary"
+                android:textColorHint="?attr/colorOnSecondary"
+                android:inputType="textMultiLine"/>
+
+            <!-- Priority level title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@string/tv_priority_level_text"
+                android:textColor="?attr/colorPrimary" />
+
+
+            <!-- Priority level variants -->
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_priority"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:entries="@array/priority_array" />
+
+            <!-- Content title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/small_text_size"
+                android:textColor="?attr/colorPrimary"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@string/tv_content_text"/>
+
+            <!-- Edit text note content -->
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="@string/content_hint"
+                android:textColor="?attr/colorOnSecondary"
+                android:textColorHint="?attr/colorOnSecondary"
+                android:textSize="@dimen/medium_text_size"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
