@@ -41,9 +41,8 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Listener {
         // Set layout.
         setContentView(binding.root)
 
-        // Set ActionBar.
-        supportActionBar?.title = getString(R.string.notes_list_activity_titles) // set title to action bar
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) // set display UP button
+        // Set title to action bar.
+        supportActionBar?.title = getString(R.string.notes_list_activity_titles)
 
         // Set adapter.
         adapter = NotesListAdapter(context = this, listener = this)

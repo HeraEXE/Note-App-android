@@ -32,6 +32,9 @@ class AddEditNoteActivity : AppCompatActivity() {
         // Set layout.
         setContentView(binding.root)
 
+        // Set display UP button.
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // Gets note value from the intent.
         val note = intent.getParcelableExtra<Note>("note")
         if (note != null) { // checks whether note is not null

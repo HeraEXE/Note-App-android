@@ -4,6 +4,7 @@
 
     <!-- Application -->
     <application
+        android:name=".App"
         android:allowBackup="false"
         android:fullBackupOnly="false"
         android:icon="@mipmap/ic_launcher"

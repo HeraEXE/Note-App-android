@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
-    id 'dagger.hilt.android.plugin'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -35,9 +35,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-}
-kapt {
-    correctErrorTypes true
 }
 
 dependencies {
