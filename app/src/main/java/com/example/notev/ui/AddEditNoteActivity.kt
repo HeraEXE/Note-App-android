@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import com.example.notev.R
 import com.example.notev.data.models.Note
 import com.example.notev.databinding.ActivityAddEditNoteBinding
@@ -101,58 +102,94 @@ class AddEditNoteActivity : AppCompatActivity() {
 
                 // Validate.
                 if (validate(title, content)) {
-                    val priorityLevel = spinnerPriority.selectedItemId.toInt() // get priority level
-                    viewModel.note.value?.run {
-                        viewModel.update(
-                            copy(
-                                title,
-                                content,
-                                priorityLevel
-                            )
-                        ) // update edited note in the database
-                    }
-                    finish() // finish this activity
+
+                    // Create and Show Alert Dialog.
+                    AlertDialog
+                        .Builder(this@AddEditNoteActivity)
+                        .setCancelable(false) // user can't ignore it
+                        .setTitle(this@AddEditNoteActivity.getText(R.string.dialog_edit_note_title)) // dialog title
+                        .setMessage(this@AddEditNoteActivity.getText(R.string.dialog_edit_note_message)) // dialog message
+                        // On Positive.
+                        .setPositiveButton(this@AddEditNoteActivity.getText(R.string.dialog_edit_note_positive)) { dialog, _ ->
+                            val priorityLevel =
+                                spinnerPriority.selectedItemId.toInt() // get priority level
+                            viewModel.note.value?.run {
+                                viewModel.update(
+                                    copy(
+                                        title,
+                                        content,
+                                        priorityLevel
+                                    )
+                                ) // update edited note in the database
+                            }
+                            finish() // finish this activity
+                            dialog.dismiss() // remove dialog from the display
+                        }
+                        // On Negative.
+                        .setNegativeButton(this@AddEditNoteActivity.getText(R.string.dialog_cancel)) { dialog, _ ->
+                            dialog.dismiss() // remove dialog from the display
+                        }
+                        .create() // create dialog
+                        .show() // show dialog
                 }
             }
             true // returns
         }
         R.id.action_delete -> { // DELETE
-            binding.run {
-                viewModel.note.value?.run {
-                    viewModel.delete(this) // delete note in the database
+
+            // Create and Show Alert Dialog.
+            AlertDialog
+                .Builder(this@AddEditNoteActivity)
+                .setCancelable(false) // user can't ignore it
+                .setTitle(this@AddEditNoteActivity.getText(R.string.dialog_delete_note_title)) // dialog title
+                .setMessage(this@AddEditNoteActivity.getText(R.string.dialog_delete_note_message)) // dialog message
+                // On Positive.
+                .setPositiveButton(this@AddEditNoteActivity.getText(R.string.dialog_delete_note_positive)) { dialog, _ ->
+                    binding.run {
+                        viewModel.note.value?.run {
+                            viewModel.delete(this) // delete note in the database
+                        }
+                        finish() // finish this activity
+                        dialog.dismiss() // remove dialog from the display
+                    }
                 }
-                finish() // finish this activity
-            }
+                // On Negative.
+                .setNegativeButton(this@AddEditNoteActivity.getText(R.string.dialog_cancel)) { dialog, _ ->
+                    dialog.dismiss() // remove dialog from the display
+                }
+                .create() // create dialog
+                .show() // show dialog
             true // returns
         }
         else -> super.onOptionsItemSelected(item)
     }
 
 
-/**
- * Validate user input edit text views.
- * @param [title] and [content] are user input.
- * @return [true] if is valid, [false] otherwise.
- */
-private fun validate(title: String, content: String): Boolean {
-    var isValid = true // isValid flag
+    /**
+     * Validate user input edit text views.
+     * @param [title] and [content] are user input.
+     * @return [true] if is valid, [false] otherwise.
+     */
+    private fun validate(title: String, content: String): Boolean {
+        var isValid = true // isValid flag
 
-    // Checks whether title is empty.
-    if (title.isEmpty()) {
-        isValid = false // result is not valid
-        binding.etTitle.error = this.getText(R.string.error_empty_text) // edit text will show error
-    } else {
-        binding.etTitle.error = null // edit text hides error
-    }
+        // Checks whether title is empty.
+        if (title.isEmpty()) {
+            isValid = false // result is not valid
+            binding.etTitle.error =
+                this.getText(R.string.error_empty_text) // edit text will show error
+        } else {
+            binding.etTitle.error = null // edit text hides error
+        }
 
-    // Checks whether content is empty.
-    if (content.isEmpty()) {
-        isValid = false // result is not valid
-        binding.etContent.error =
-            this.getText(R.string.error_empty_text) // edit text will show error
-    } else {
-        binding.etContent.error = null // edit text hides error
+        // Checks whether content is empty.
+        if (content.isEmpty()) {
+            isValid = false // result is not valid
+            binding.etContent.error =
+                this.getText(R.string.error_empty_text) // edit text will show error
+        } else {
+            binding.etContent.error = null // edit text hides error
+        }
+        return isValid // result
     }
-    return isValid // result
-}
 }
