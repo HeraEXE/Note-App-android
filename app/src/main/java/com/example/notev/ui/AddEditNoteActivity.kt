@@ -35,7 +35,8 @@ class AddEditNoteActivity : AppCompatActivity() {
         // Gets note value from the intent.
         val note = intent.getParcelableExtra<Note>("note")
         if (note != null) { // checks whether note is not null
-            viewModel.noteStatus = NoteStatus.EDIT // if yes, this is EDIT status.
+            viewModel.noteStatus = NoteStatus.EDIT // if yes, this is EDIT status
+            supportActionBar?.title = getString(R.string.edit_note_activity_title) // set title to action bar
             // Set note value to views.
             binding.run {
                 etTitle.setText(note.title) // set title to edit text
@@ -44,6 +45,7 @@ class AddEditNoteActivity : AppCompatActivity() {
             }
         } else {
             viewModel.noteStatus = NoteStatus.ADD // otherwise, this is ADD status.
+            supportActionBar?.title = getString(R.string.add_note_activity_title) // set title to action bar
         }
     }
 }

@@ -30,4 +30,9 @@
 
     <!-- Formatter Pattern -->
     <string name="date_format">MMMM dd  yyyy</string>
+
+    <!-- Action bar Titles -->
+    <string name="notes_list_activity_titles">Notes</string>
+    <string name="add_note_activity_title">Add</string>
+    <string name="edit_note_activity_title">Edit</string>
 </resources>

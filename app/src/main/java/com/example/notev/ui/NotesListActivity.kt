@@ -9,6 +9,7 @@ import com.example.notev.R
 import com.example.notev.adapter.NotesListAdapter
 import com.example.notev.data.models.Note
 import com.example.notev.databinding.ActivityNotesListBinding
+import com.example.notev.utils.extension.startSpecificActivity
 import com.example.notev.viewmodels.NotesListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -40,6 +41,10 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Listener {
         // Set layout.
         setContentView(binding.root)
 
+        // Set ActionBar.
+        supportActionBar?.title = getString(R.string.notes_list_activity_titles) // set title to action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // set display UP button
+
         // Set adapter.
         adapter = NotesListAdapter(context = this, listener = this)
 
@@ -55,7 +60,7 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Listener {
 
         // Init Fab
         binding.fabAddNote.setOnClickListener {
-            TODO("Not yet implemented")
+            startSpecificActivity(AddEditNoteActivity::class.java) { it } // starts AddEditNoteActivity
         }
 
         // Get list of notes from database and set it to adapter's async list differ.
@@ -66,7 +71,12 @@ class NotesListActivity : AppCompatActivity(), NotesListAdapter.Listener {
         }
     }
 
+
     override fun onNoteItemClick(note: Note) {
-        TODO("Not yet implemented")
+        // starts AddEditNoteActivity.
+        startSpecificActivity(AddEditNoteActivity::class.java) {
+            it.putExtra("note", note) // puts extra "note" value to intent
+            it
+        }
     }
 }
