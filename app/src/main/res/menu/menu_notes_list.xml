@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Search item -->
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search_item_name"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <!-- Sort item -->
+    <item
+        android:id="@+id/collapsing_sort"
+        android:title="@string/sort_item_name"
+        android:icon="@drawable/ic_sort"
+        app:showAsAction="ifRoom">
+        <menu>
+
+            <!-- Newest -->
+            <item
+                android:id="@+id/action_sort_by_newest"
+                android:title="@string/newest_option"
+                app:showAsAction="never"/>
+
+            <!-- Oldest -->
+            <item
+                android:id="@+id/action_sort_by_oldest"
+                android:title="@string/oldest_option"
+                app:showAsAction="never"/>
+
+            <!-- Low level priority -->
+            <item
+                android:id="@+id/action_sort_by_low"
+                android:title="@string/low_level_option"
+                app:showAsAction="never"/>
+
+            <!-- High level priority -->
+            <item
+                android:id="@+id/action_sort_by_high"
+                android:title="@string/high_level_option"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+</menu>

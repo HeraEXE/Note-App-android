@@ -11,6 +11,16 @@
     <string name="title_hint">Title</string>
     <string name="content_hint">Content</string>
 
+    <!-- Menu items names -->
+    <string name="search_item_name">Search</string>
+    <string name="sort_item_name">Sort by</string>
+    <string name="newest_option">Newest</string>
+    <string name="oldest_option">Oldest</string>
+    <string name="low_level_option">Low level</string>
+    <string name="high_level_option">High level</string>
+    <string name="save_item_name">Save</string>
+    <string name="delete_item_name">Delete</string>
+
     <!-- String-Arrays -->
     <string-array name="priority_array">
         <item>Low</item>
