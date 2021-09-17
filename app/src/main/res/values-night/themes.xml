@@ -13,7 +13,7 @@
         <item name="colorOnSecondary">@color/white</item>
 
         <!-- Status and Navigation bars color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
     </style>
 </resources>

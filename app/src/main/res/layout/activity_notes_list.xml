@@ -22,8 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/medium_margin"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
         android:src="@drawable/ic_add"
-        app:tint="?attr/colorPrimaryVariant"
+        app:tint="?attr/colorOnPrimary"
         app:maxImageSize="@dimen/max_image_size" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
