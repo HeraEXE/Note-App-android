@@ -25,7 +25,7 @@ class NotesListViewModel @Inject constructor(
     val query: StateFlow<String> get() = _query
 
     // Sorting flow.
-    private val _sort = MutableStateFlow(Sorting.BY_NEWEST)
+    private val _sort = MutableStateFlow(Sorting.BY_OLDEST)
     val sort: StateFlow<Sorting> get() = _sort
 
     // Notes gets flow list of notes (Flow<List<Note>>) when query and/or sorting change their values.
