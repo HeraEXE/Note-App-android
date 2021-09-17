@@ -7,6 +7,7 @@ import com.example.notev.ui.NotesListActivity
 import com.example.notev.utils.Sorting
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
@@ -20,10 +21,12 @@ class NotesListViewModel @Inject constructor(
 ) : ViewModel() {
 
     // Search query flow.
-    val query = MutableStateFlow("")
+    private val _query = MutableStateFlow("")
+    val query: StateFlow<String> get() = _query
 
     // Sorting flow.
-    val sort = MutableStateFlow(Sorting.BY_NEWEST)
+    private val _sort = MutableStateFlow(Sorting.BY_NEWEST)
+    val sort: StateFlow<Sorting> get() = _sort
 
     // Notes gets flow list of notes (Flow<List<Note>>) when query and/or sorting change their values.
     val notes = combine(query, sort) { query, sort ->
@@ -32,4 +35,19 @@ class NotesListViewModel @Inject constructor(
         repository.getAllNotes(query, sort) // returns Flow<List<Note>> to notes variable
     }
 
+
+    /**
+     * Sets query value to flow.
+     */
+    fun setQuery(str: String) {
+        _query.value = str
+    }
+
+
+    /**
+     * Sets sorting value to flow.
+     */
+    fun setSorting(sorting: Sorting) {
+        _sort.value = sorting
+    }
 }
