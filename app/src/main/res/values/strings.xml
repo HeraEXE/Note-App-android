@@ -27,4 +27,7 @@
         <item>Medium</item>
         <item>High</item>
     </string-array>
+
+    <!-- Formatter Pattern -->
+    <string name="date_format">MMMM dd  yyyy</string>
 </resources>

@@ -5,11 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.notev.data.Repository
 import com.example.notev.data.models.Note
 import com.example.notev.data.room.NoteDatabase
+import com.example.notev.ui.AddEditNoteActivity
 import com.example.notev.utils.NoteStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for [AddEditNoteActivity].
+ */
 @HiltViewModel
 class AddEditNoteViewModel @Inject constructor(
     private val repository: Repository

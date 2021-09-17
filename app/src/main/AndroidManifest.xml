@@ -15,7 +15,13 @@
         <!-- Add Edit Note Activity -->
         <activity
             android:name=".ui.AddEditNoteActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".ui.NotesListActivity">
+            <!-- Meta-Data -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NotesListActivity" />
+        </activity>
 
         <!-- Notes List Activity (Launcher) -->
         <activity

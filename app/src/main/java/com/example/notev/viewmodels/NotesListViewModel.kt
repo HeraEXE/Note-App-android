@@ -2,6 +2,8 @@ package com.example.notev.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.example.notev.data.Repository
+import com.example.notev.ui.AddEditNoteActivity
+import com.example.notev.ui.NotesListActivity
 import com.example.notev.utils.Sorting
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,6 +11,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
+/**
+ * ViewModel for [NotesListActivity].
+ */
 @HiltViewModel
 class NotesListViewModel @Inject constructor(
     private val repository: Repository
