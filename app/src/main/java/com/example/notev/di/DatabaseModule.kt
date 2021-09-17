@@ -23,14 +23,14 @@ object DatabaseModule {
     @Singleton
     fun provideNoteDao(
         @ApplicationContext context: Context
-    ) {
-        Room
+    ): NoteDao {
+        val db = Room
             .databaseBuilder(
                 context, // application context
                 NoteDatabase::class.java, // database class
                 "note_database" // database name
             )
             .build() // builds room database
-            .noteDao() // returns its Dao interface
+        return db.noteDao() // returns its Dao interface
     }
 }
