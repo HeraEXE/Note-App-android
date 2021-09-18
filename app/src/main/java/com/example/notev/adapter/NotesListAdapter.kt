@@ -20,7 +20,7 @@ class NotesListAdapter(
     /**
      * Interface to implement on note item click function.
      */
-    interface Listener {
+    fun interface Listener {
 
         /**
          * This method should be implemented in activity to selected note object.

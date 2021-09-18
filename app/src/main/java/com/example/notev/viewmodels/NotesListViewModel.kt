@@ -50,4 +50,18 @@ class NotesListViewModel @Inject constructor(
     fun setSorting(sorting: Sorting) {
         _sort.value = sorting
     }
+
+
+    /**
+     * Sets sorting value to flow by id.
+     */
+    fun setSorting(sortingId: Int) {
+        _sort.value = when (sortingId) {
+            Sorting.BY_NEWEST.id -> Sorting.BY_NEWEST
+            Sorting.BY_OLDEST.id -> Sorting.BY_OLDEST
+            Sorting.BY_LOW_LEVEL.id -> Sorting.BY_LOW_LEVEL
+            Sorting.BY_HIGH_LEVEL.id -> Sorting.BY_HIGH_LEVEL
+            else -> return
+        }
+    }
 }
